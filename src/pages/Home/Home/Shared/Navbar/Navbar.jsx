@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../../Providers/AuthProvider';
 
 const Navbar = () => {
+    const { user } = useContext(AuthContext)
+    console.log(user);
     return (
         <div className="navbar  bg-gradient-to-r from-pink-500 to-purple-500 h-28">
             <div className="flex-1">
