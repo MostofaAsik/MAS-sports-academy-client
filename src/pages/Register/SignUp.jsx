@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc'
@@ -30,7 +29,7 @@ const Register = () => {
         googleLogin()
             .then(result => {
                 const loggedUser = result.user;
-                console.log(result.user);
+                console.log(loggedUser);
                 navigate(from, { replace: true })
             })
             .catch(error => {

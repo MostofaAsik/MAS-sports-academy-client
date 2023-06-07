@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
@@ -33,7 +32,7 @@ const Register = () => {
         googleLogin()
             .then(result => {
                 const loggedUser = result.user;
-                console.log(result.user);
+                console.log(loggedUser);
                 navigate(from, { replace: true })
             })
             .catch(error => {
