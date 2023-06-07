@@ -22,7 +22,7 @@ const Register = () => {
 
     };
 
-    console.log(img_hosting_url);
+
 
 
     return (
