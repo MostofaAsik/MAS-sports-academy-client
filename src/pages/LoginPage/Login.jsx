@@ -1,14 +1,24 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { FaArrowDown, FaGoogle, } from 'react-icons/fa';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 import { FcGoogle } from 'react-icons/fc'
 import { useForm } from "react-hook-form";
+import { AuthContext } from '../Providers/AuthProvider';
 
 const Register = () => {
     const [show, setShow] = useState(false)
+    const { googleLogin } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/'
+
     const { register, handleSubmit } = useForm();
+    const onSubmit = data => {
+        console.log(data);
+    }
+
     // const handleLogin = (event) => {
     //     event.preventDefault()
     //     const form = event.target
@@ -18,8 +28,17 @@ const Register = () => {
 
     // }
 
-    const onSubmit = data => {
-        console.log(data);
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(result.user);
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     }
 
     return (
@@ -70,7 +89,7 @@ const Register = () => {
                         <div>
                             <div className="divider">OR</div>
                         </div>
-                        <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+                        <div onClick={handleGoogleLogin} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
 
                             <FcGoogle size={32} />
 

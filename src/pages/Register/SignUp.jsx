@@ -1,15 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc'
 import logo from '../../assets/images/logo.png'
+import { AuthContext } from '../Providers/AuthProvider';
 
 
 // const imag_hosting_token = import.meta.env.VITE_Image_Upload_Token
 
 const Register = () => {
     const { register, handleSubmit } = useForm();
+    const { googleLogin } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/'
 
     // const img_hosting_url = `https://api.imgbb.com/1/upload?key=${imag_hosting_token}`
 
@@ -18,11 +24,19 @@ const Register = () => {
         const formData = new FormData()
         formData.append('photo', data.photo[0])
 
-
-
     };
 
-
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(result.user);
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
 
 
     return (
@@ -37,7 +51,7 @@ const Register = () => {
                         <Link to='/login'><span className='text-primary'> LogIn here</span> </Link>
                     </p>
 
-                    <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+                    <div onClick={handleGoogleLogin} className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
 
                         <FcGoogle size={32} />
 
