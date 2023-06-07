@@ -6,7 +6,8 @@ import logo from '../../assets/images/logo.png'
 import { AuthContext } from '../Providers/AuthProvider';
 
 
-// const imag_hosting_token = import.meta.env.VITE_Image_Upload_Token
+const img_hosting_token = import.meta.env.VITE_Image_Upload_Token
+
 
 const Register = () => {
     const { register, handleSubmit } = useForm();
@@ -16,12 +17,20 @@ const Register = () => {
 
     const from = location.state?.from?.pathname || '/'
 
-    // const img_hosting_url = `https://api.imgbb.com/1/upload?key=${imag_hosting_token}`
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
     const onSubmit = data => {
         console.log(data)
         const formData = new FormData()
         formData.append('photo', data.photo[0])
+        fetch(img_hosting_url, {
+            method: "POST",
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(imgResponse => {
+                console.log(imgResponse);
+            })
 
     };
 

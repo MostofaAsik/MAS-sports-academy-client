@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../Providers/AuthProvider';
+import logo from '../../../../../assets/images/sports.jpg'
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -17,7 +18,9 @@ const Navbar = () => {
     return (
         <div className="navbar  bg-gradient-to-r from-pink-500 to-purple-500 h-28">
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                <a className="btn btn-ghost normal-case text-xl">
+                    <img className='w-20 h-14' src={logo} alt="" />
+                </a>
                 <h1 className='text-3xl font bold'>MAS Sport Academy</h1>
             </div>
             <div className="flex-none">

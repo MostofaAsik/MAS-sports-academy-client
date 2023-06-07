@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../../../../assets/images/sports.jpg'
 
 const Footer = () => {
     return (
@@ -25,7 +26,7 @@ const Footer = () => {
             </footer>
             <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
                 <div className="items-center grid-flow-col">
-                    <img src="" alt="image asbe" />
+                    <img className='h-24 w-24' src={logo} alt="image asbe" />
                     <div className='flex flex-col'>
                         <h2 className='text-3xl text-red-500'>MAS Sports Academy</h2>
                         <h2>Providing reliable sport since 2022</h2>
