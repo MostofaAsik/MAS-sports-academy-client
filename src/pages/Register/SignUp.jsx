@@ -89,7 +89,7 @@ const Register = () => {
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center   p-6 bg-gradient-to-r from-[#786c53] to-[#89a293] ">
                     <h1 className="text-5xl font-bold mb-6">Register now!</h1>
-                    <img src={logo} className='w-[300px] h-auto' />
+                    <img src={logo} className='w-[300px] h-auto ' />
 
                     <p className='text-base-300 mt-5'>ALready Have an Account?
                         <Link to='/login'><span className='text-primary'> LogIn here</span> </Link>
