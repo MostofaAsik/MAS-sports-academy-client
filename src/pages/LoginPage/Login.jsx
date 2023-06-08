@@ -45,7 +45,19 @@ const Register = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                navigate(from, { replace: true })
+                const saveUser = { name: loggedUser.displayName, email: loggedUser.email }
+                fetch(`${import.meta.env.VITE_API_URL}/users`, {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate(from, { replace: true })
+
+                    })
             })
             .catch(error => {
                 console.log(error.message);

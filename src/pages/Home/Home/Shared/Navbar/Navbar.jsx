@@ -35,7 +35,9 @@ const Navbar = () => {
 
                         {
                             user ? <>
-                                <li>Dashboard </li>
+                                <li>
+                                    <Link to='/dashboard/myselected'>DashBoard</Link>
+                                </li>
                                 <li><button onClick={handleLogOut}>LogOut</button></li>
                             </> :
                                 <li>

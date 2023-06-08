@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.drawer-side a.active {
+    color: rgb(120, 10, 10);
+}
+
+.drawer-side a {
+    background: transparent;
+}

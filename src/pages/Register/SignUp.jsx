@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 import logo from '../../assets/images/logo.png'
 import { AuthContext } from '../Providers/AuthProvider';
 import { updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 
 // const img_hosting_token = import.meta.env.VITE_Image_Upload_Token
@@ -40,10 +41,32 @@ const Register = () => {
                     console.log(createdUser)
                     setSuccess("You are succesfull created an account")
                     setError('')
-                    reset()
-                    logOut()
-                    navigate('/login')
                     updateUserProfile(createdUser, data.name, data.photo)
+                    const saveUser = { name: data.name, email: data.email }
+                    fetch(`${import.meta.env.VITE_API_URL}/users`, {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(saveUser)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                reset()
+                                logOut()
+                                navigate('/login')
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'User Created Succesfully',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+
+
 
                 })
                 .catch(error => {
@@ -63,6 +86,7 @@ const Register = () => {
         })
             .then(() => {
                 console.log("User Update Succesfully");
+
             })
             .catch(error => {
                 console.log(error.message);
@@ -75,7 +99,22 @@ const Register = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                navigate(from, { replace: true })
+                const saveUser = { name: loggedUser.displayName, email: loggedUser.email }
+                fetch(`${import.meta.env.VITE_API_URL}/users`, {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate(from, { replace: true })
+                    })
+
+
+
+
             })
             .catch(error => {
                 console.log(error.message);
