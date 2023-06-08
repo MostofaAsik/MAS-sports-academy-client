@@ -1,38 +1,74 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { FcGoogle } from 'react-icons/fc'
 import logo from '../../assets/images/logo.png'
 import { AuthContext } from '../Providers/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_Token
+// const img_hosting_token = import.meta.env.VITE_Image_Upload_Token
 
 
 const Register = () => {
-    const { register, handleSubmit } = useForm();
-    const { googleLogin } = useContext(AuthContext)
+    const { register, handleSubmit, reset } = useForm();
+    const { createUser, googleLogin, logOut } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     const from = location.state?.from?.pathname || '/'
 
-    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+    // const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
     const onSubmit = data => {
         console.log(data)
-        const formData = new FormData()
-        formData.append('photo', data.photo[0])
-        fetch(img_hosting_url, {
-            method: "POST",
-            body: formData,
-        })
-            .then(res => res.json())
-            .then(imgResponse => {
-                console.log(imgResponse);
-            })
+
+        if (data.password.length < 6) {
+            setError('Password minimum  6 charecters')
+        }
+
+        console.log(data.password === data.confirmpassword)
+
+        setSuccess('')
+        if (data.password === data.confirmpassword) {
+            setError('Password and Confirmpassword didnot match')
+            createUser(data.email, data.password)
+                .then(result => {
+                    const createdUser = result.user;
+                    console.log(createdUser)
+                    setSuccess("You are succesfull created an account")
+                    setError('')
+                    reset()
+                    logOut()
+                    navigate('/login')
+                    updateUserProfile(createdUser, data.name, data.photo)
+
+                })
+                .catch(error => {
+                    console.log(error.message)
+
+                })
+        }
+        setError('Password and Confirmpassword didnot match')
 
     };
+
+
+    //update profile
+    const updateUserProfile = (user, name, photo) => {
+        updateProfile(user, {
+            displayName: name, photoURL: photo
+        })
+            .then(() => {
+                console.log("User Update Succesfully");
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
+
 
     const handleGoogleLogin = () => {
         googleLogin()
@@ -69,8 +105,8 @@ const Register = () => {
                 </div>
                 <div className="card  max-w-lg shadow-2xl bg-base-100">
                     <div className="card-body">
-                        {/* <p className='mb-2 text-red-600'> {error}</p>
-                        <p className='mb-2 text-red-600'> {success}</p> */}
+                        <p className='mb-2 text-red-600'> {error}</p>
+                        <p className='mb-2 text-red-600'> {success}</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-control">
                                 <label className="label">
@@ -80,14 +116,14 @@ const Register = () => {
                                     {...register("name", { required: true })}
                                     className="input input-bordered" required />
                             </div>
-                            {/* <div className="form-control w-full">
+                            <div className="form-control w-full">
                                 <label className="label">
                                     <span className="label-text">PhotoUrl</span>
                                 </label>
                                 <input type="text" name='photo' placeholder="Url"
                                     {...register("photo", { required: true })} className="input input-bordered" required />
 
-                            </div> */}
+                            </div>
 
 
 
@@ -116,13 +152,13 @@ const Register = () => {
                                 <input type="password" name='password'
                                     {...register("confirmpassword", { required: true })} placeholder="Password" className="input input-bordered" required />
                             </div>
-                            <div className="form-control w-full max-w-xs">
+                            {/* <div className="form-control w-full max-w-xs">
                                 <label className="label">
                                     <span className="label-text">Image</span>
                                 </label>
                                 <input type="file" name='photo' {...register("photo", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
 
-                            </div>
+                            </div> */}
 
                             <div className="form-control mt-6">
                                 {/* <button className="btn btn-primary">Login</button> */}

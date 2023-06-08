@@ -7,25 +7,37 @@ import { AuthContext } from '../Providers/AuthProvider';
 
 const Register = () => {
     const [show, setShow] = useState(false)
-    const { googleLogin } = useContext(AuthContext)
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+    const { logIn, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
 
     const from = location.state?.from?.pathname || '/'
 
-    const { register, handleSubmit } = useForm();
+
+
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
         console.log(data);
+        setSuccess('')
+        logIn(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                setSuccess("Successfully Login")
+                setError('')
+                reset()
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error.message);
+                setError("Email and Password does not match")
+            })
+
     }
 
-    // const handleLogin = (event) => {
-    //     event.preventDefault()
-    //     const form = event.target
-    //     const email = form.email.value
-    //     const password = form.password.value
-    //     console.log(email, password);
 
-    // }
 
 
     const handleGoogleLogin = () => {
@@ -56,8 +68,8 @@ const Register = () => {
                 </div>
                 <div className="card flex-shrink-0  max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
-                        {/* <p className='mb-2 text-red-600'> {error}</p>
-                        <p className='mb-2 text-red-600'> {success}</p> */}
+                        <p className='mb-2 text-red-600'> {error}</p>
+                        <p className='mb-2 text-red-600'> {success}</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
 
                             <div className="form-control">
@@ -77,7 +89,7 @@ const Register = () => {
                                     {...register("password", { required: true })}
                                     placeholder="Password" className="input input-bordered" />
                             </div>
-                            <p onClick={() => setShow(!show)}>
+                            <p onClick={() => setShow(!show)} >
                                 {show ? <span>Hide Password</span> : <span>Show Password</span>}
                             </p>
                             <div className="form-control mt-6">
