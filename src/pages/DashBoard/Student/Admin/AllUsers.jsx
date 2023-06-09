@@ -34,6 +34,25 @@ const AllUsers = () => {
 
 
     const handleMakeInstructor = (user) => {
+        fetch(`${import.meta.env.VITE_API_URL}/users/instructor/${user._id}`, {
+            method: "PATCH"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount) {
+                    refetch()
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is instructor now`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
+                }
+            })
+
 
     }
 
@@ -66,14 +85,16 @@ const AllUsers = () => {
                                 <td>{user.email}</td>
                                 <td>
                                     {
-                                        user.role === 'admin' ? 'admin' : <button onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-secondary ">admin</button>
+                                        user.role === 'admin' ? 'admin' : <button onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-secondary ">Make Admin</button>
                                     }
                                 </td>
                                 <td>
 
-                                    {user.role === 'instructor' ? 'instructor' : <button
-                                        onClick={() => handleMakeInstructor(user)}
-                                        className="btn btn-outline btn-secondary  ">instructor</button>}
+                                    {
+                                        user.role === 'instructor' ? 'instructor' : <button
+                                            onClick={() => handleMakeInstructor(user)}
+                                            className="btn btn-outline btn-secondary  ">Make Instructor</button>
+                                    }
                                 </td>
                             </tr>)
                         }
