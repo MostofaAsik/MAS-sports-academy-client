@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../Providers/AuthProvider';
 import logo from '../../../../../assets/images/sports.jpg'
+import { RxAvatar } from 'react-icons/rx';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -50,7 +51,7 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img title={user?.displayName} src={user?.photoURL} />
+                            <img title={user?.displayName} src={user ? user?.photoURL : <RxAvatar></RxAvatar>} />
                         </div>
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">

@@ -7,6 +7,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import DashBoard from "../Layout/DashBoard";
 import MySelectedClasses from "../pages/DashBoard/Student/MySelectedClasses";
 import PrivateRoute from "./PrivateRoute";
+import AllUsers from "../pages/DashBoard/Student/Admin/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
         children: [
+            {
+                path: 'manageuser',
+                element: <AllUsers></AllUsers>
+            },
             {
                 path: 'myselected',
                 element: <MySelectedClasses></MySelectedClasses>

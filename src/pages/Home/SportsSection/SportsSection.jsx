@@ -4,6 +4,14 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper";
+import './SportsSection.css'
+
+import img1 from '../../../assets/images/xtra/img1.jpg'
+import img2 from '../../../assets/images/xtra/img2.jpg'
+import img3 from '../../../assets/images/xtra/img3.jpg'
+import img4 from '../../../assets/images/xtra/img4.jpg'
+import img5 from '../../../assets/images/xtra/img5.jpg'
+import img6 from '../../../assets/images/xtra/img6.jpg'
 
 const SportsSection = () => {
     return (
@@ -29,31 +37,31 @@ const SportsSection = () => {
                             className="mySwiper"
                         >
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                                <img src={img1} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                                <img src={img2} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                                <img src={img3} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                                <img src={img4} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                                <img src={img5} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                                <img src={img6} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                                <img src={img2} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                                <img src={img4} />
                             </SwiperSlide>
                             <SwiperSlide>
-                                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                                <img src={img6} />
                             </SwiperSlide>
                         </Swiper>
                         <div className='text-3xl font-bold mt-4'>

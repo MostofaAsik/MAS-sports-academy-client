@@ -1,11 +1,17 @@
 import React, { useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { FaBookOpen, FaHome, FaWallet } from 'react-icons/fa';
+import { RxAvatar } from 'react-icons/rx';
 import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { AuthContext } from '../pages/Providers/AuthProvider';
 
 const DashBoard = () => {
     const { user } = useContext(AuthContext)
+
+    //TODO
+    const isAdmin = true;
+
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -30,22 +36,45 @@ const DashBoard = () => {
 
                     {/* Sidebar content here */}
                     {/* all link here  */}
-                    <li>
-                        <NavLink to='/dashboard/myselected'>
-                            <FaBookOpen
-                            ></FaBookOpen> My Seleted Class
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/dashboard/enrollclass'>
-                            <BsFillBookmarkCheckFill />  My Enroll Class
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/dashboard/paymenthistory'>
-                            <FaWallet></FaWallet> Payment History
-                        </NavLink>
-                    </li>
+
+                    {
+                        isAdmin ? <>
+                            <li>
+                                <NavLink to='/dashboard/manageclass'>
+                                    <FaBookOpen
+                                    ></FaBookOpen>Manage Classes
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink to='/dashboard/manageuser'>
+                                    <RxAvatar></RxAvatar> Manage User
+                                </NavLink>
+                            </li>
+
+                        </>
+                            : <>
+                                <li>
+                                    <NavLink to='/dashboard/myselected'>
+                                        <FaBookOpen
+                                        ></FaBookOpen> My Seleted Class
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to='/dashboard/enrollclass'>
+                                        <BsFillBookmarkCheckFill />  My Enroll Class
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to='/dashboard/paymenthistory'>
+                                        <FaWallet></FaWallet> Payment History
+                                    </NavLink>
+                                </li>
+                            </>
+
+                    }
+
+
                     <div className="divider"></div>
                     <li>
                         <NavLink to='/'>
