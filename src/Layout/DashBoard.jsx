@@ -11,6 +11,9 @@ const DashBoard = () => {
     //TODO
     const isAdmin = true;
 
+    //TODO
+    const isInstructor = true
+
 
     return (
         <div className="drawer lg:drawer-open">
@@ -51,6 +54,17 @@ const DashBoard = () => {
                                     <RxAvatar></RxAvatar> Manage User
                                 </NavLink>
                             </li>
+
+                        </> : isInstructor ? <>
+                            <NavLink to='/dashboard/addclass'>
+                                <FaBookOpen
+                                ></FaBookOpen> Add Class
+                            </NavLink>
+
+                            <NavLink to='/dashboard/addclass'>
+                                <FaBookOpen
+                                ></FaBookOpen>My Classes
+                            </NavLink>
 
                         </>
                             : <>
