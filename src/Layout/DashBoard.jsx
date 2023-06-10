@@ -4,12 +4,14 @@ import { FaBookOpen, FaHome, FaWallet } from 'react-icons/fa';
 import { RxAvatar } from 'react-icons/rx';
 import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { AuthContext } from '../pages/Providers/AuthProvider';
+import useAdmin from '../hooks/useAdmin';
 
 const DashBoard = () => {
     const { user } = useContext(AuthContext)
 
     //TODO
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin()
 
     //TODO
     const isInstructor = true
