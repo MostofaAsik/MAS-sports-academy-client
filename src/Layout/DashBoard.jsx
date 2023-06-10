@@ -5,6 +5,7 @@ import { RxAvatar } from 'react-icons/rx';
 import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 import { AuthContext } from '../pages/Providers/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
+import useInstructor from '../hooks/useInstructor';
 
 const DashBoard = () => {
     const { user } = useContext(AuthContext)
@@ -14,7 +15,8 @@ const DashBoard = () => {
     const [isAdmin] = useAdmin()
 
     //TODO
-    const isInstructor = true
+    // const isInstructor = true
+    const [isInstructor] = useInstructor()
 
 
     return (
