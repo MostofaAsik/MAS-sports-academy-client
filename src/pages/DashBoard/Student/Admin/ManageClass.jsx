@@ -36,39 +36,39 @@ const ManageClass = () => {
                     toast.success(`${course.className}, is denied`);
                 }
             });
-        // console.log(course);
+
     };
 
     ///
 
-    const handleDelete = (course) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: `You want to delete ${course.className}?`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`http://localhost:5000/classes/${course._id}`, {
-                    method: "DELETE",
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.deletedCount > 0) {
-                            refetch();
-                            Swal.fire(
-                                "Deleted!",
-                                `${course.className} is deleted`,
-                                "success"
-                            );
-                        }
-                    });
-            }
-        });
-    };
+    // const handleDelete = (course) => {
+    //     Swal.fire({
+    //         title: "Are you sure?",
+    //         text: `You want to delete ${course.className}?`,
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes, delete it!",
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             fetch(`http://localhost:5000/classes/${course._id}`, {
+    //                 method: "DELETE",
+    //             })
+    //                 .then((res) => res.json())
+    //                 .then((data) => {
+    //                     if (data.deletedCount > 0) {
+    //                         refetch();
+    //                         Swal.fire(
+    //                             "Deleted!",
+    //                             `${course.className} is deleted`,
+    //                             "success"
+    //                         );
+    //                     }
+    //                 });
+    //         }
+    //     });
+    // };
 
     return (
         <div>
@@ -119,11 +119,11 @@ const ManageClass = () => {
                                 </td>
                                 <td>{course.instructorEmail}</td>
                                 <td>{course.status}</td>
-                                <td className="flex flex-col items-center justify-center space-y-1">
+                                <td className="flex flex-row gap-2 items-center justify-center space-y-1">
                                     {course.status === "pending" || course.status === "denied" ? (
                                         <button
                                             onClick={() => handleApproved(course)}
-                                            className="btn btn-sm btn-success text-white"
+                                            className="btn btn-sm btn-outine text-black"
                                         >
                                             Approved
                                         </button>
@@ -131,7 +131,7 @@ const ManageClass = () => {
                                         <button
                                             disabled
                                             onClick={() => handleApproved(course)}
-                                            className="btn btn-sm btn-success text-white"
+                                            className="btn btn-sm btn-outline text-black"
                                         >
                                             Approved
                                         </button>
