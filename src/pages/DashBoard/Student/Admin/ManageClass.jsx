@@ -24,7 +24,7 @@ const ManageClass = () => {
             });
     };
     //
-    const handleDenied = (course) => {
+    const handleDeny = (course) => {
         fetch(`http://localhost:5000/classes/denied/${course._id}`, {
             method: "PATCH",
         })
@@ -39,36 +39,36 @@ const ManageClass = () => {
 
     };
 
-    ///
 
-    // const handleDelete = (course) => {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: `You want to delete ${course.className}?`,
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!",
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             fetch(`http://localhost:5000/classes/${course._id}`, {
-    //                 method: "DELETE",
-    //             })
-    //                 .then((res) => res.json())
-    //                 .then((data) => {
-    //                     if (data.deletedCount > 0) {
-    //                         refetch();
-    //                         Swal.fire(
-    //                             "Deleted!",
-    //                             `${course.className} is deleted`,
-    //                             "success"
-    //                         );
-    //                     }
-    //                 });
-    //         }
-    //     });
-    // };
+
+    const handleDelete = (course) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You want to delete ${course.className}?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/classes/${course._id}`, {
+                    method: "DELETE",
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if (data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                "Deleted!",
+                                `${course.className} is deleted`,
+                                "success"
+                            );
+                        }
+                    });
+            }
+        });
+    };
 
     return (
         <div>
@@ -91,9 +91,10 @@ const ManageClass = () => {
                             <th>Status</th>
                             <th className="text-center">Change Status</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody className="bg-[#007cff] bg-opacity-10">
+                    <tbody className="bg-[#060e17] bg-opacity-10">
                         {/* row 1 */}
                         {classes?.map((course, index) => (
                             <tr className="border-b-2 border-gray-500" key={course._id}>
@@ -139,7 +140,7 @@ const ManageClass = () => {
                                     {course.status === "pending" ||
                                         course.status === "approved" ? (
                                         <button
-                                            onClick={() => handleDenied(course)}
+                                            onClick={() => handleDeny(course)}
                                             className="btn btn-sm btn-error text-white"
                                         >
                                             Denied
@@ -147,7 +148,7 @@ const ManageClass = () => {
                                     ) : (
                                         <button
                                             disabled
-                                            onClick={() => handleDenied(course)}
+                                            onClick={() => handleDeny(course)}
                                             className="btn btn-sm btn-error text-white"
                                         >
                                             Denied
@@ -162,6 +163,7 @@ const ManageClass = () => {
                                         Delete
                                     </button>
                                 </th>
+                                <td><button className="btn btn-accent">Feedback</button></td>
                             </tr>
                         ))}
                     </tbody>
