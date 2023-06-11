@@ -79,12 +79,10 @@ const ManageClass = () => {
                 <div className="overflow-x-auto"></div>
                 <table className="table">
                     {/* head */}
-                    <thead className="bg-[#007cff] bg-opacity-20">
+                    <thead className="bg-[#ff0077] bg-opacity-20">
                         <tr>
                             <th>
-                                <label>
-                                    <p>#</p>
-                                </label>
+                                #
                             </th>
                             <th className="text-center">Name</th>
                             <th>Email</th>
@@ -109,7 +107,7 @@ const ManageClass = () => {
                                             <div className="mask mask-squircle w-12 h-12">
                                                 <img
                                                     src={course.classImage}
-                                                    alt="Avatar Tailwind CSS Component"
+                                                    alt="pic"
                                                 />
                                             </div>
                                         </div>
@@ -118,7 +116,7 @@ const ManageClass = () => {
                                         </div>
                                     </div>
                                 </td>
-                                <td>{course.instructorEmail}</td>
+                                <td>{course.email}</td>
                                 <td>{course.status}</td>
                                 <td className="flex flex-row gap-2 items-center justify-center space-y-1">
                                     {course.status === "pending" || course.status === "denied" ? (
