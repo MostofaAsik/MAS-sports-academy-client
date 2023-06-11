@@ -65,7 +65,7 @@ const DashBoard = () => {
                                 ></FaBookOpen> Add Class
                             </NavLink>
 
-                            <NavLink to='/dashboard/addclass'>
+                            <NavLink to='/dashboard/myclass'>
                                 <FaBookOpen
                                 ></FaBookOpen>My Classes
                             </NavLink>
