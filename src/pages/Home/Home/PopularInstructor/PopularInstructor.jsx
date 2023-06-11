@@ -1,10 +1,18 @@
-import React from 'react';
+
+import useClass from '../../../../hooks/useClass';
 
 const PopularInstructor = () => {
+    const [classes] = useClass()
+    console.log("class", classes);
+
     return (
-        <div>
-            <h2 className='text-3xl text-center'> Popular Instructor </h2>
-        </div>
+        <>
+            <h2>Popular Instructor</h2>
+
+            <div className='grid grid-cols-3 gap-3'>
+
+            </div>
+        </>
     );
 };
 

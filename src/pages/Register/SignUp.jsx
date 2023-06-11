@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 
 const Register = () => {
     const { register, handleSubmit, reset } = useForm();
-    const { createUser, googleLogin, logOut } = useContext(AuthContext)
+    const { createUser, googleLogin, } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const [error, setError] = useState('')
@@ -34,7 +34,6 @@ const Register = () => {
 
         setSuccess('')
         if (data.password === data.confirmpassword) {
-            setError('Password and Confirmpassword didnot match')
             createUser(data.email, data.password)
                 .then(result => {
                     const createdUser = result.user;
@@ -54,8 +53,8 @@ const Register = () => {
                         .then(data => {
                             if (data.insertedId) {
                                 reset()
-                                logOut()
-                                navigate('/login')
+                                // logOut()
+                                navigate('/')
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
@@ -74,7 +73,10 @@ const Register = () => {
 
                 })
         }
-        setError('Password and Confirmpassword didnot match')
+        else {
+
+            setError('Password and Confirmpassword didnot match')
+        }
 
     };
 
