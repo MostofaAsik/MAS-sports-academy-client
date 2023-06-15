@@ -11,7 +11,7 @@ const ManageClass = () => {
     // console.log(classes);
 
     const handleApproved = (course) => {
-        fetch(`http://localhost:5000/classes/approved/${course._id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/classes/approved/${course._id}`, {
             method: "PATCH",
         })
             .then((res) => res.json())
@@ -25,7 +25,7 @@ const ManageClass = () => {
     };
     //
     const handleDeny = (course) => {
-        fetch(`http://localhost:5000/classes/denied/${course._id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/classes/denied/${course._id}`, {
             method: "PATCH",
         })
             .then((res) => res.json())
@@ -52,7 +52,7 @@ const ManageClass = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/classes/${course._id}`, {
+                fetch(`${import.meta.env.VITE_API_URL}/classes/${course._id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())

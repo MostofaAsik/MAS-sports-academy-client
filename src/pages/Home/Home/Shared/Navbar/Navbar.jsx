@@ -31,8 +31,12 @@ const Navbar = () => {
                         <li>
                             <Link to='/'>Home</Link>
                         </li>
-                        <li>Instructors</li>
-                        <li>Classes</li>
+                        <li>
+                            <Link to='/instructor'>Instructors</Link>
+                        </li>
+                        <li>
+                            <Link to='/classes'>Classes</Link>
+                        </li>
 
                         {
                             user ? <>

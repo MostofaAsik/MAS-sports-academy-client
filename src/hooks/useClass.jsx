@@ -4,7 +4,7 @@ const useClass = () => {
     const { data: classes = [], isLoading: loading, refetch } = useQuery({
         queryKey: ["class"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/class")
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/class`)
             return res.json();
         }
     })

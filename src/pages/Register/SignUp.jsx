@@ -41,7 +41,7 @@ const Register = () => {
                     setSuccess("You are succesfull created an account")
                     setError('')
                     updateUserProfile(createdUser, data.name, data.photo)
-                    const saveUser = { name: data.name, email: data.email }
+                    const saveUser = { name: data.name, email: data.email, photo: data.photo }
                     fetch(`${import.meta.env.VITE_API_URL}/users`, {
                         method: "POST",
                         headers: {
