@@ -24,4 +24,4 @@
 
 ## Live Link
 
-https://mas-toys-center.web.app/
+https://sports-academy-a-12.web.app/
